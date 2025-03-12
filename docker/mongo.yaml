@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  mongo:
+    image: mongo
+    network_mode: "host"
+    restart: always
+    env_file: .env
+  mongo-client:
+    image: mongo-express
+    network_mode: "host"
+    restart: always
+    env_file: .env
+    depends_on:
+      - mongo
