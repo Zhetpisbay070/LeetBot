@@ -78,7 +78,7 @@ func (lp *LongPoll) Run() {
 		lp.handleBotFeedbackCommand,
 	))
 	dispatcher.AddHandler(handlers.NewCallback(
-		func(query *gotgbot.CallbackQuery) bool { return strings.HasPrefix(query.Data, "feedbackKeys") },
+		func(query *gotgbot.CallbackQuery) bool { return strings.HasPrefix(query.Data, "feedback") },
 		lp.handlerFeedSelection,
 	))
 	dispatcher.AddHandler(handlers.NewCallback(
@@ -238,9 +238,9 @@ func (lp *LongPoll) handlerFeedSelection(b *gotgbot.Bot, ctx *ext.Context) error
 	}
 	log.Println("[handlerFeedSelection] Фидбек успешно сохранен в MongoDB")
 
-	// Подтверждаем клик по кнопке (чтобы "часики" исчезли)
+	// Подтверждаем клик по кнопке 
 	_, _ = query.Answer(b, nil)
-	log.Println("[handlerFeedSelection] Callback-кнопка подтверждена (часики исчезли)")
+	log.Println("[handlerFeedSelection] Callback-кнопка подтверждена")
 
 	// Удаляем кнопки (редактируем сообщение, убирая markup)
 	log.Printf("[handlerFeedSelection] Удаляем кнопки из сообщения chatID=%d, messageID=%d", chatID, messageID)
