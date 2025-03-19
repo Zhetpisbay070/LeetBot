@@ -31,12 +31,12 @@ func (lp *LongPoll) handleWebAppData(b *gotgbot.Bot, ctx *ext.Context) error {
 	log.Printf("[ChatId=%d] Got json from WebApp: %s", chat.Id, json)
 
 	if house, err := model.ParseAndValidate[model.House](json); err == nil {
-		house.OwnerID = chat.Id
-		house.Active = true
-		kv, _ := lp.photoCache.GetAndDelete(chat.Id)
-		if kv != nil {
-			house.PhotoIDs = kv.Value()
-		}
+		//house.OwnerID = chat.Id
+		//house.Active = true
+		//kv, _ := lp.photoCache.GetAndDelete(chat.Id)
+		//if kv != nil {
+		//	house.PhotoIDs = kv.Value()
+		//}
 		return lp.handleWebAppHouse(chat, house)
 	}
 
